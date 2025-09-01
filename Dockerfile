@@ -43,16 +43,17 @@ RUN mkdir -p ~/.steam                  && \
     mkdir -p ~/scripts/steamcmd        && \
     mkdir -p ~/scripts/shell/installer
 
-RUN steamcmd +quit
+RUN steamcmd +quit                                    && \
+    rm -rf ~/.local/share/Steam/steamcmd/package      && \
+    rm -rf ~/.local/share/Steam/steamcmd/public       && \
+    rm -rf ~/.local/share/Steam/steamcmd/siteserverui && \
+    rm -rf ~/.local/share/Steam/steamcmd/steamcmd.sh  && \
+    rm -rf ~/Steam/
+    
 RUN ln -s ~/.local/share/Steam/steamcmd/linux32 ~/.steam/sdk32         && \
     ln -s ~/.local/share/Steam/steamcmd/linux64 ~/.steam/sdk64         && \
     ln -s ~/.steam/sdk32/steamclient.so ~/.steam/sdk32/steamservice.so && \
     ln -s ~/.steam/sdk64/steamclient.so ~/.steam/sdk64/steamservice.so
-
-RUN rm -rf ~/.local/share/Steam/steamcmd/package      && \
-    rm -rf ~/.local/share/Steam/steamcmd/public       && \
-    rm -rf ~/.local/share/Steam/steamcmd/siteserverui && \
-    rm -rf ~/Steam/
 
 COPY --chown=admin:admin scripts/shell/run_server.sh /home/container/scripts/shell/run_server.sh
 COPY --chown=admin:admin scripts/shell/entrypoint.sh /home/container/scripts/shell/entrypoint.sh
