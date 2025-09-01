@@ -43,6 +43,7 @@ RUN mkdir -p ~/.steam                  && \
     mkdir -p ~/scripts/steamcmd        && \
     mkdir -p ~/scripts/shell/installer
 
+RUN steamcmd +quit
 RUN ln -s ~/.local/share/Steam/steamcmd/linux32 ~/.steam/sdk32         && \
     ln -s ~/.local/share/Steam/steamcmd/linux64 ~/.steam/sdk64         && \
     ln -s ~/.steam/sdk32/steamclient.so ~/.steam/sdk32/steamservice.so && \
