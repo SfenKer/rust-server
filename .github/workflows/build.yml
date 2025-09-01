@@ -24,6 +24,5 @@ jobs:
           push: 'true'
           tags: |
             ghcr.io/sfenker/rust-server:latest
-            ghcr.io/sfenker/rust-server:${{ github.sha }}
           cache-from: type=gha,scope=rust-server
           cache-to: type=gha,mode=max,scope=rust-server
