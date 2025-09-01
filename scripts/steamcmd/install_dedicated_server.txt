@@ -1,0 +1,6 @@
+@sSteamCmdForcePlatformType linux
+force_install_dir /home/container/server/
+login anonymous
+app_info_update 1
+app_update 258550
+quit
