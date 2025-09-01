@@ -4,12 +4,6 @@
 ~/scripts/shell/installer/rust_installer.sh
 ~/scripts/shell/installer/oxide_installer.sh
 
-# Exit Handler
-function signal_handler {
-    echo '{"Identifier":-1,"Message":"quit","Name":"WebRcon"}' | websocat ws://127.0.0.1:$RCON_PORT/$RCON_PASSWORD > /dev/null 2>&1
-    exit
-}
-
 # Generate Startup Command
 function add_argument { 
     if [ ! -z "${!2}" ]; then
@@ -52,9 +46,6 @@ add_argument "rcon.port" RCON_PORT
 add_argument "rcon.password" RCON_PASSWORD
 
 add_argument "app.port" APP_PORT
-
-# Signal Handler
-trap 'signal_handler' SIGINT SIGTERM
 
 # Start Server
 cd /home/container/server || exit 1
