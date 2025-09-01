@@ -36,11 +36,17 @@ RUN ln -s /usr/games/steamcmd /usr/bin/steamcmd
 
 # Post Install
 USER admin
-RUN mkdir -p ~/server                  && \
+RUN mkdir -p ~/.steam                  && \
+    mkdir -p ~/server                  && \
     mkdir -p ~/storage                 && \
     mkdir -p ~/scripts/shell           && \
     mkdir -p ~/scripts/steamcmd        && \
     mkdir -p ~/scripts/shell/installer
+
+RUN ln -s ~/.local/share/Steam/steamcmd/linux32 ~/.steam/sdk32         && \
+    ln -s ~/.local/share/Steam/steamcmd/linux64 ~/.steam/sdk64         && \
+    ln -s ~/.steam/sdk32/steamclient.so ~/.steam/sdk32/steamservice.so && \
+    ln -s ~/.steam/sdk64/steamclient.so ~/.steam/sdk64/steamservice.so
 
 COPY --chown=admin:admin scripts/shell/run_server.sh /home/container/scripts/shell/run_server.sh
 COPY --chown=admin:admin scripts/shell/entrypoint.sh /home/container/scripts/shell/entrypoint.sh
