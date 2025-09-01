@@ -31,6 +31,10 @@ ENV LANGUAGE='en_US:en'
 RUN sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && \
     locale-gen en_US.UTF-8
 
+# Install Websocat
+RUN curl -sL $(curl -s https://api.github.com/repos/vi/websocat/releases | jq -r '[.[] | select(.prerelease==true or .prerelease==false)][0].assets[] | select(.name | test("websocat.*x86_64.*linux")) | .browser_download_url') -o /bin/websocat && \
+    chmod +x /bin/websocat
+
 # Create SymLinks
 RUN ln -s /usr/games/steamcmd /usr/bin/steamcmd
 
